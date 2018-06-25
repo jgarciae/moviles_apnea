@@ -28,7 +28,21 @@ class RestDatosController extends AppController
     public function getall(){
 
       if ($this->request->is('post')) {
-        debug($this->request->data);
+
+        if ($this->request->data) {
+                $status = '200';
+                $message = 'Ok';
+            }else{
+                $status = '401';
+                $message = 'Unauthorized';
+            }
+
+            $this->set([
+                'status' => $status,
+                'message' => $message,
+                'datos' => $this->request->data,
+                '_serialize' => ['status', 'message', 'datos']
+            ]);
       }
     }
 
