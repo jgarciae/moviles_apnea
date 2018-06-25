@@ -60,6 +60,10 @@ Router::scope('/api', function ($routes) {
       'action' => 'signin',
       'method' => 'POST']
   ]]);
+  $routes->resources('RestDatos', ['map' => ['getall' => [
+      'action' => 'getall',
+      'method' => 'POST']
+  ]]);
 });
 
 Router::scope('/', function (RouteBuilder $routes) {

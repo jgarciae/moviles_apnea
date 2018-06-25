@@ -24,10 +24,10 @@ class RestDatosController extends AppController
         $this->Auth->allow(['getall']);
     }
 
-    public function mregister(){
+    public function getall(){
 
       if ($this->request->is('post')) {
-        
+        debug($this->request->data);
       }
     }
 
