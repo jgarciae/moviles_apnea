@@ -21,13 +21,41 @@ class RestDatosController extends AppController
     public function beforeFilter(Event $event)
     {
         $this->loadModel('Users');
-        $this->Auth->allow(['getall']);
+        $this->loadModel('Datos');
+        $this->Auth->allow(['getall','daterange']);
     }
 
     public function getall(){
 
       if ($this->request->is('post')) {
         debug($this->request->data);
+      }
+    }
+
+    public function daterange(){
+      if ($this->request->is('post')) {
+        $datos = $this->Datos->find('all',[
+          'conditions'=>[
+            'fecha >='=>$this->request->data['inicio'],
+            'fecha <='=>$this->request->data['fin']
+          ]
+        ]);
+
+        if ($datos) {
+                $status = '200';
+                $message = 'Ok';
+            }else{
+                $status = '401';
+                $message = 'Unauthorized';
+            }
+
+            $this->set([
+                'status' => $status,
+                'message' => $message,
+                'datos' => $datos,
+                '_serialize' => ['status', 'message', 'datos']
+            ]);
+
       }
     }
 
