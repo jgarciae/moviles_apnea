@@ -30,7 +30,7 @@ class RestDatosController extends AppController
       if ($this->request->is('post')) {
         $hora = $this->request->data['hora'];
         $fecha = $this->request->data['fecha'];
-        $name = $fecha.'|'.$hora.'|'.$this->request->data['id'];
+        $name = $this->request->data['id'];
         $data = $this->request->data['data'];
 
 
