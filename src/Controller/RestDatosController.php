@@ -30,6 +30,7 @@ class RestDatosController extends AppController
       if ($this->request->is('post')) {
         $hora = $this->request->data['hora'];
         $fecha = $this->request->data['fecha'];
+
         $name = $this->request->data['id'];
         $data = $this->request->data['data'];
 
@@ -39,7 +40,7 @@ class RestDatosController extends AppController
         $dato->fecha = $fecha;
         $dato->data = $data;
         $dato->name = $name;
-
+        $dato->user_id = 1;
         if ($this->Datos->save($dato)) {
             $status = '200';
             $message = 'Ok';
