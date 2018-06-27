@@ -28,20 +28,31 @@ class RestDatosController extends AppController
     public function getall(){
 
       if ($this->request->is('post')) {
-        if ($this->request->data) {
-                $status = '200';
-                $message = 'Ok';
-            }else{
-                $status = '401';
-                $message = 'Unauthorized';
-            }
+        $hora = $this->request->data['hora'];
+        $fecha = $this->request->data['fecha'];
+        $name = $fecha.'|'.$hora.'|'.$this->request->data['id'];
+        $data = $this->request->data['data'];
 
-            $this->set([
-                'status' => $status,
-                'message' => $message,
-                'datos' => $this->request->data,
-                '_serialize' => ['status', 'message', 'datos']
-            ]);
+
+        $dato = $this->Datos->newEntity();
+        $dato->hora = $hora;
+        $dato->fecha = $fecha;
+        $dato->data = $data;
+        $dato->name = $name;
+
+        if ($this->Datos->save($dato)) {
+            $status = '200';
+            $message = 'Ok';
+        }else{
+            $status = '401';
+            $message = 'Unauthorized';
+        }
+
+        $this->set([
+            'status' => $status,
+            'message' => $message,
+            '_serialize' => ['status', 'message']
+        ]);
       }
     }
 
