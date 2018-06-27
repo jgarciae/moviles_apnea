@@ -68,6 +68,10 @@ Router::scope('/api', function ($routes) {
       'action' => 'daterange',
       'method' => 'POST']
   ]]);
+  $routes->resources('RestDatos', ['map' => ['getrecords' => [
+      'action' => 'getrecords',
+      'method' => 'POST']
+  ]]);
 });
 
 Router::scope('/', function (RouteBuilder $routes) {

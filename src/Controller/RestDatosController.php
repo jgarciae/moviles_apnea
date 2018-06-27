@@ -22,7 +22,7 @@ class RestDatosController extends AppController
     {
         $this->loadModel('Users');
         $this->loadModel('Datos');
-        $this->Auth->allow(['getall','daterange']);
+        $this->Auth->allow(['getall','daterange','getrecords']);
     }
 
     public function getall(){
@@ -75,26 +75,31 @@ class RestDatosController extends AppController
       }
     }
 
-    // public function signin(){
-    //
-    //   if ($this->request->is('post')) {
-    //     $user = $this->Auth->identify($this->request->data);
-    //
-    //     if ($user['active']) {
-    //         $status = '200';
-    //         $message = 'Ok';
-    //     }else{
-    //         $status = '401';
-    //         $message = 'Unauthorized';
-    //     }
-    //
-    //     $this->set([
-    //         'status' => $status,
-    //         'message' => $message,
-    //         'user' => $user,
-    //         '_serialize' => ['status', 'message', 'user']
-    //     ]);
-    //   }
-    // }
+    public function getrecords(){
+      if ($this->request->is('post')) {
+        $datos = $this->Datos->find('all',[
+          'fields'=>[
+            'id','name','hora','fecha','data'
+          ],
+          'conditions'=>[
+            'Datos.id'=>$this->request->data['id'],
+          ]
+        ]);
+      if ($datos) {
+          $status = '200';
+          $message = 'Ok';
+      }else{
+          $status = '401';
+          $message = 'Unauthorized';
+      }
 
+      $this->set([
+          'status' => $status,
+          'message' => $message,
+          'datos' => $datos,
+          '_serialize' => ['status', 'message', 'datos']
+      ]);
+
+      }
+    }
 }
