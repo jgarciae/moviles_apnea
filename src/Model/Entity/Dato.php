@@ -11,6 +11,7 @@ use Cake\ORM\Entity;
  * @property \Cake\I18n\FrozenTime $hora
  * @property \Cake\I18n\FrozenDate $fecha
  * @property int $user_id
+ * @property string $name
  *
  * @property \App\Model\Entity\User $user
  */
@@ -31,6 +32,7 @@ class Dato extends Entity
         'hora' => true,
         'fecha' => true,
         'user_id' => true,
+        'name' => true,
         'user' => true
     ];
 }

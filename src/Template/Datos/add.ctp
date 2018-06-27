@@ -21,6 +21,7 @@
             echo $this->Form->control('hora');
             echo $this->Form->control('fecha');
             echo $this->Form->control('user_id', ['options' => $users]);
+            echo $this->Form->control('name');
         ?>
     </fieldset>
     <?= $this->Form->button(__('Submit')) ?>

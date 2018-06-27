@@ -70,6 +70,12 @@ class DatosTable extends Table
             ->requirePresence('fecha', 'create')
             ->notEmpty('fecha');
 
+        $validator
+            ->scalar('name')
+            ->maxLength('name', 64)
+            ->requirePresence('name', 'create')
+            ->notEmpty('name');
+
         return $validator;
     }
 

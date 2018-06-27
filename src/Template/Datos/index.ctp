@@ -21,6 +21,7 @@
                 <th scope="col"><?= $this->Paginator->sort('hora') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('fecha') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('user_id') ?></th>
+                <th scope="col"><?= $this->Paginator->sort('name') ?></th>
                 <th scope="col" class="actions"><?= __('Actions') ?></th>
             </tr>
         </thead>
@@ -31,6 +32,7 @@
                 <td><?= h($dato->hora) ?></td>
                 <td><?= h($dato->fecha) ?></td>
                 <td><?= $dato->has('user') ? $this->Html->link($dato->user->name, ['controller' => 'Users', 'action' => 'view', $dato->user->id]) : '' ?></td>
+                <td><?= h($dato->name) ?></td>
                 <td class="actions">
                     <?= $this->Html->link(__('View'), ['action' => 'view', $dato->id]) ?>
                     <?= $this->Html->link(__('Edit'), ['action' => 'edit', $dato->id]) ?>

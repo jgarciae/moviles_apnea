@@ -28,7 +28,6 @@ class RestDatosController extends AppController
     public function getall(){
 
       if ($this->request->is('post')) {
-
         if ($this->request->data) {
                 $status = '200';
                 $message = 'Ok';
@@ -49,6 +48,9 @@ class RestDatosController extends AppController
     public function daterange(){
       if ($this->request->is('post')) {
         $datos = $this->Datos->find('all',[
+          'fields'=>[
+            'id','name'
+          ],
           'conditions'=>[
             'fecha >='=>$this->request->data['inicio'],
             'fecha <='=>$this->request->data['fin']

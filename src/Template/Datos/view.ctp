@@ -23,6 +23,10 @@
             <td><?= $dato->has('user') ? $this->Html->link($dato->user->name, ['controller' => 'Users', 'action' => 'view', $dato->user->id]) : '' ?></td>
         </tr>
         <tr>
+            <th scope="row"><?= __('Name') ?></th>
+            <td><?= h($dato->name) ?></td>
+        </tr>
+        <tr>
             <th scope="row"><?= __('Id') ?></th>
             <td><?= $this->Number->format($dato->id) ?></td>
         </tr>
