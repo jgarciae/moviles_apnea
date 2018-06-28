@@ -89,14 +89,39 @@ class RestDatosController extends AppController
 
     public function getrecords(){
       if ($this->request->is('post')) {
+        $dn = $datos = $this->Datos->find('all',[
+          'fields'=>[
+            'id','name','hora','fecha'
+          ],
+          'conditions'=>[
+            'Datos.id'=>$this->request->data['id'],
+          ]
+        ])->first();
         $datos = $this->Datos->find('all',[
           'fields'=>[
             'id','name','hora','fecha','data'
           ],
           'conditions'=>[
-            'Datos.id'=>$this->request->data['id'],
+            'Datos.name'=>$dn->name,
           ]
         ]);
+        $d = "";
+        $d_x = "";
+        foreach ($datos as $key => $value) {
+          $d = $value->data;
+          if($d_x == ""){
+            $d_x = $d;
+          }else{
+            $d_x = $d.','.$d_x;
+          }
+        }
+        $datos=[[
+          'id'=>$dn->id,
+          'name'=>$dn->name,
+          'hora'=>$dn->hora,
+          'fecha'=>$dn->fecha,
+          'data'=>$d_x,]
+        ];
       if ($datos) {
           $status = '200';
           $message = 'Ok';
@@ -111,6 +136,12 @@ class RestDatosController extends AppController
           'datos' => $datos,
           '_serialize' => ['status', 'message', 'datos']
       ]);
+
+      }
+    }
+
+    public function diagnostic(){
+      if ($this->request->is('post')) {
 
       }
     }
